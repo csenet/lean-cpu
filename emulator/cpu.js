@@ -77,6 +77,7 @@ function assemble(inputCode) {
     if (operation.match(/^[-0-9]+$/)) {
       // 値はメモリにそのまま格納するため，opcodeは-1
       instructions[i].opcode = -1;
+      instructions[i].operand = operation;
       continue;
     }
     if (operations[operation] === undefined) {
@@ -92,7 +93,6 @@ function assemble(inputCode) {
     if (operand === '') continue;
     // 数値の場合はそのまま代入する命令
     if (operand.match(/^[-0-9]+$/)) {
-      // 数値の場合はそのまま代入する命令
       instructions[i].operand = parseInt(operand);
     } else if (labels[operand] === undefined) {
       throw new Error(`Unknown label: ${operand}`);
@@ -121,7 +121,7 @@ function step() {
     case 0x00: case 0x01: break; // nop
     case 0x02: case 0x03: running = false; break; // stop
     case 0x04: acc = operand; break; // load
-    case 0x05: acc = mem[operand]; break;
+    case 0x05: acc = mem[operand]; console.log(operand); break;
     case 0x06: acc = idx + operand; break; // loadx
     case 0x07: acc = mem[idx + operand]; break;
     case 0x08: case 0x09: mem[operand] = acc; break; // store
@@ -187,7 +187,10 @@ function run() {
   pc = 0;
   acc = 0;
   idx = 0;
+  // clear memory
+  for (let i = 0; i < 256; i++) mem[i] = 0;
   codeLength = load(editor.getValue());
+  console.log(assemble(editor.getValue()));
   dumpMemory();
   running = true;
   setTimeout(step, 1000);
