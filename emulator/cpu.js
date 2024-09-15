@@ -61,7 +61,7 @@ function assemble(inputCode) {
       instructions.push({ operation: 'nop', operand: '0' });
       continue;
     }
-    const matched_line = line.match(/^ *(|[A-Za-z][A-Za-z0-9]*:) *([-a-z0-9]+) *([A-Za-z0-9]*) *$/);
+    const matched_line = line.match(/^ *(|[A-Za-z][A-Za-z0-9]*:) *([-a-z0-9]+) *([-A-Za-z0-9]*) *$/);
     if (matched_line === null) {
       throw new Error(`Syntax error: ${line}`);
     }
