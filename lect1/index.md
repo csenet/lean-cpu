@@ -67,3 +67,24 @@ Z: 0
 
 ![](./fig/10.png)
 
+
+# 基礎的なプログラム
+
+以下は基礎的なプログラムです．
+これはXとYを掛け算してZに格納するプログラムです．
+
+```
+L:0
+load Z
+addi X
+store Z
+load Y
+subi 1
+store Y
+ifp L
+stop
+
+X:3
+Y:4
+Z:0
+```
