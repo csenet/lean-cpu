@@ -8,6 +8,8 @@ const programInput = document.getElementById('editor');
 const memoryOutput = document.getElementById('output');
 const accOutput = document.getElementById('acc');
 const idxOutput = document.getElementById('idx');
+
+let speed = 0;
 // const pcOutput = document.getElementById('pc');
 
 // Memory
@@ -145,7 +147,7 @@ function step() {
     default: running = false; throw new Error(`Unknown opcode: ${opcode}`);
   }
   dumpMemory();
-  if (running) { setTimeout(step, 1000); return; }
+  if (running) { setTimeout(step, speed); return; }
 }
 
 function dumpMemory() {
@@ -196,6 +198,15 @@ function run() {
   console.log(assemble(editor.getValue()));
   dumpMemory();
   running = true;
-  setTimeout(step, 1000);
+  setTimeout(step, speed);
 }
 
+function run_s() {
+  speed = 1000;
+  run();
+}
+
+function run_f() {
+  speed = 0;
+  run();
+}
