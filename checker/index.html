@@ -1,0 +1,91 @@
+<html lang="ja">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+  <title>Code Chcker</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/ruby-head-wasm-wasi@latest/dist/browser.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ruby-wasm-wasi@0.1.2/dist/index.umd.js"
+    integrity="sha256-cPmKu5S3jkz5j0NnceapOfiWkzhBQqiBovOLjeYXwA0=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@wasmer/wasmfs@0.12.0/lib/index.iife.js"
+    integrity="sha256-sOd4ekxVsN4PXhR+cn/4uNAxeQOJRcsaW5qalYfvkTw=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@wasmer/wasi@0.12.0/lib/index.iife.js"
+    integrity="sha256-FslFp/Vq4bDf2GXu+9QyBEDLtEWO3fkMjpyOaJMHJT8=" crossorigin="anonymous"></script>
+  <script src="/src/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/src/mode-ruby.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+  <div class="container-fluid p-5">
+    <h1>Rubyチェッカー</h1>
+    問題を選択
+    <select class="form-select" aria-label="Question Select" id="question">
+      <option selected>選択してください</option>
+      <option value="0a">0a</option>
+      <option value="1a">1a</option>
+      <option value="1b">1b</option>
+      <option value="1c">1c</option>
+      <option value="1d">1d</option>
+      <option value="2a">2a</option>
+      <option value="2b">2b</option>
+      <option value="2c">2c</option>
+      <option value="2d">2d</option>
+      <option value="2e">2e</option>
+      <option value="2f">2f</option>
+      <option value="3rev">3rev</option>
+      <option value="3a">3a</option>
+      <option value="3b">3b</option>
+      <option value="3c">3c</option>
+      <option value="3d">3d</option>
+      <option value="4a">4a</option>
+      <option value="4b">4b</option>
+      <option value="4c">4c</option>
+      <option value="4d">4d</option>
+      <option value="4e">4e</option>
+    </select>
+    <div class="row pt-1">
+      <div class="col-6">
+        <label for="input">Code</label><br>
+        <div id="editor"></div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <label for="output">Output</label><br>
+          <textarea id="output" class="form-control" name="code"></textarea>
+        </div>
+        <div class="row">
+          <label for="judge-output">Judge Result</label><br>
+          <div id="judge-output" class="form-control" name="judge-output" contenteditable="true"></div>
+        </div>
+      </div>
+    </div>
+    <p class="py-2">
+      <button onclick="run()" class="btn btn-success" id="run-btn">Run</button>
+      <button onclick="judge()" class="btn btn-primary" id="check-btn" disabled>Check</button>
+    </p>
+  </div>
+  <style>
+    #editor {
+      width: auto;
+      height: 500px;
+    }
+
+    #output {
+      width: 100%;
+      height: 150px;
+    }
+
+    #judge-output {
+      width: 100%;
+      height: 330px;
+      overflow-y: scroll;
+    }
+  </style>
+  <script src="judge.js?time=038" type="text/javascript"></script>
+</body>
+
+</html>
