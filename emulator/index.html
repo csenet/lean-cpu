@@ -66,9 +66,126 @@
     </div>
     <p class="py-2">
       <button onclick="run()" class="btn btn-success" id="run-btn">Run</button>
-      <button onclick="judge()" class="btn btn-primary" id="check-btn" disabled>Check</button>
+      <button onclick="stop()" class="btn btn-primary" id="check-btn">Stop</button>
     </p>
+    <h3>命令セット一覧</h3>
+    <table class="table">
+      <tbody>
+        <thead>
+          <tr>
+            <td>名前</td>
+            <td>OPコード(値指定)</td>
+            <td>OPコード(ラベル指定)</td>
+            <td>命令の動作</td>
+          </tr>
+        </thead>
+      <tbody>
+        <tr>
+          <td>nop</td>
+          <td>00</td>
+          <td>01</td>
+          <td>何もしない</td>
+        </tr>
+        <tr>
+          <td>stop</td>
+          <td>02</td>
+          <td>03</td>
+          <td>プログラムの実行を停止</td>
+        </tr>
+        <tr>
+          <td>load</td>
+          <td>04</td>
+          <td>06</td>
+          <td>Accに値を持って来る</td>
+        </tr>
+        <tr>
+          <td>loadx</td>
+          <td>06</td>
+          <td>07</td>
+          <td>引数として指定した(値/番地)にIdxを足す</td>
+        </tr>
+        <tr>
+          <td>store</td>
+          <td>08</td>
+          <td>09</td>
+          <td>Accの値を格納する</td>
+        </tr>
+        <tr>
+          <td>storex</td>
+          <td>0a</td>
+          <td>0b</td>
+          <td>Accの値をメモリに格納する。値・ラベル指定問わずそのアドレスからIdx進んだ場所が格納先となる。</td>
+        </tr>
+        <tr>
+          <td>addi, add</td>
+          <td>0c</td>
+          <td>0d</td>
+          <td>Accに値を加算。値指定(addi)の場合、加数はその値。ラベル指定(add)の場合、加数はそのアドレスの値。</td>
+        </tr>
+        <tr>
+          <td>subi, sub</td>
+          <td>0e</td>
+          <td>0f</td>
+          <td>Accから値を減算。値の指定方法はaddと同様。</td>
+        </tr>
+        <tr>
+          <td>iload</td>
+          <td>10</td>
+          <td>11</td>
+          <td>Idxに値を代入。値の指定方法はaddと同様。</td>
+        </tr>
+        <tr>
+          <td>iaddi, iadd</td>
+          <td>12</td>
+          <td>13</td>
+          <td>Idxに値を加算。値の指定方法はaddと同様。</td>
+        </tr>
+        <tr>
+          <td>isubi, isub</td>
+          <td>14</td>
+          <td>15</td>
+          <td>Idxから値を減算。値の指定方法はaddと同様。</td>
+        </tr>
+        <tr>
+          <td>ifz</td>
+          <td>16</td>
+          <td>17</td>
+          <td>Accが0の時、PCを指定したアドレスに移動する。値を入れるとアドレスとして解釈され，ラベル指定の場合は移動先はそのラベルのついたアドレスの番地となる</td>
+        </tr>
+        <tr>
+          <td>ifnz</td>
+          <td>18</td>
+          <td>19</td>
+          <td>Accが0でない時、PCを指定したアドレスに移動。移動先の指定はifzと同様。</td>
+        </tr>
+        <tr>
+          <td>ifp</td>
+          <td>1a</td>
+          <td>1b</td>
+          <td>Accが正の時、PCを指定したアドレスに移動。移動先の指定はifzと同様。</td>
+        </tr>
+        <tr>
+          <td>ifn</td>
+          <td>1c</td>
+          <td>1d</td>
+          <td>Accが負の時、PCを指定したアドレスに移動。移動先の指定はifzと同様。</td>
+        </tr>
+        <tr>
+          <td>jump</td>
+          <td>1e</td>
+          <td>1f</td>
+          <td>PCを指定したアドレスに移動。移動先の指定はifzと同様。</td>
+        </tr>
+        <tr>
+          <td>neg</td>
+          <td>20</td>
+          <td>21</td>
+          <td>Accの値の符号を反転。</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+
   <style>
     #editor {
       width: auto;

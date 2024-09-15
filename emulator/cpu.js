@@ -180,6 +180,9 @@ function load(code) {
   return instructions.length;
 }
 
+function stop() {
+  running = false;
+}
 
 function run() {
   editor.focus();
